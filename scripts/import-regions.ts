@@ -25,10 +25,10 @@ async function importRegions() {
     let targetFile = path.join(dataPath, "regions.json");
 
     if (!fs.existsSync(targetFile)) {
-      console.log("data/regions.json not found. Falling back to data/regions.sample.json...");
-      targetFile = path.join(dataPath, "regions.sample.json");
+      console.log("data/regions.json not found. Falling back to data/regions.sulsel.json...");
+      targetFile = path.join(dataPath, "regions.sulsel.json");
       if (!fs.existsSync(targetFile)) {
-        console.error("Neither regions.json nor regions.sample.json was found.");
+        console.error("Neither regions.json nor regions.sulsel.json was found.");
         process.exit(1);
       }
     }

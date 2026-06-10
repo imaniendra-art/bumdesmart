@@ -40,3 +40,4 @@ next-env.d.ts
 # data files
 data/regions.json
 !data/regions.sample.json
+!data/regions.sulsel.json
