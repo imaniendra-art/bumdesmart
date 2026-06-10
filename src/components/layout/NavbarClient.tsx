@@ -37,7 +37,7 @@ export default function NavbarClient({ session, unreadCount = 0 }: NavbarClientP
         <div className="flex justify-between py-4 min-h-[80px] items-center">
           {/* Logo & Brand */}
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="text-2xl font-bold tracking-tight text-surface">
+            <Link href="/" className="text-xl sm:text-2xl font-bold tracking-tight text-surface">
               bumdesmart.id
             </Link>
           </div>
@@ -131,26 +131,10 @@ export default function NavbarClient({ session, unreadCount = 0 }: NavbarClientP
             )}
           </div>
 
-          {/* Mobile Search & Menu Button */}
-          <div className="md:hidden flex items-center space-x-2 w-full justify-end ml-4">
-            <form onSubmit={handleSearch} className="flex-1 flex gap-2">
-              <input
-                type="text"
-                placeholder="Cari..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full h-10 bg-surface border border-border text-text-main rounded-md pl-3 pr-2 focus:outline-none focus:ring-1 focus:ring-secondary text-sm placeholder-text-muted"
-              />
-              <button 
-                type="submit"
-                className="h-10 px-3 bg-secondary hover:bg-secondary/90 text-secondary-dark rounded-md flex items-center justify-center transition-colors border border-secondary"
-                aria-label="Cari"
-              >
-                <Search className="h-4 w-4" />
-              </button>
-            </form>
+          {/* Mobile Menu Buttons */}
+          <div className="md:hidden flex items-center space-x-1 justify-end">
             {session && session.role === "BUMDES_ADMIN" && (
-              <Link href="/dashboard/pesanan" className="relative p-1.5 text-surface hover:text-secondary transition-colors">
+              <Link href="/dashboard/pesanan" className="relative p-2 text-surface hover:text-secondary transition-colors">
                 <Bell className="h-5 w-5" />
                 {unreadCount > 0 && (
                   <span className="absolute top-0 right-0 h-3.5 w-3.5 bg-error text-white text-[9px] font-bold rounded-full flex items-center justify-center">
@@ -159,13 +143,33 @@ export default function NavbarClient({ session, unreadCount = 0 }: NavbarClientP
                 )}
               </Link>
             )}
-            <Link href="/keranjang" className="p-1.5 text-surface hover:text-secondary transition-colors">
+            <Link href="/keranjang" className="p-2 text-surface hover:text-secondary transition-colors">
               <ShoppingCart className="h-5 w-5" />
             </Link>
-            <button onClick={toggleMobileMenu} className="text-surface p-1.5 focus:outline-none">
+            <button onClick={toggleMobileMenu} className="text-surface p-2 focus:outline-none">
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
+        </div>
+
+        {/* Mobile Search Bar Row */}
+        <div className="md:hidden pb-4 px-1">
+          <form onSubmit={handleSearch} className="flex gap-2">
+            <input
+              type="text"
+              placeholder="Cari produk..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full h-10 bg-surface border border-border text-text-main rounded-md pl-3 pr-2 focus:outline-none focus:ring-1 focus:ring-secondary text-sm placeholder-text-muted min-w-0"
+            />
+            <button 
+              type="submit"
+              className="h-10 px-4 bg-secondary hover:bg-secondary/90 text-secondary-dark rounded-md flex items-center justify-center transition-colors border border-secondary flex-shrink-0"
+              aria-label="Cari"
+            >
+              <Search className="h-4 w-4" />
+            </button>
+          </form>
         </div>
       </div>
 

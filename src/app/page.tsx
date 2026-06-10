@@ -56,25 +56,25 @@ export default async function Home() {
             <p className="text-xl sm:text-2xl text-surface/90 mb-10 max-w-2xl leading-relaxed">
               Menghubungkan BUMDes penyedia produk dengan BUMDes yang membutuhkan pasokan, agar kebutuhan usaha antar-daerah dapat saling terpenuhi.
             </p>
-            <div className="flex flex-row flex-wrap gap-4">
-              <Link href="/produk">
-                <Button variant="secondary" size="lg" className="w-full sm:w-auto font-bold px-8">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+              <Link href="/produk" className="w-full sm:w-auto">
+                <Button variant="secondary" size="lg" className="w-full font-bold px-8">
                   Mulai Belanja
                 </Button>
               </Link>
-              <Link href="/produk">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto bg-surface/10 text-surface border-surface hover:bg-surface/20">
+              <Link href="/produk" className="w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="w-full bg-surface/10 text-surface border-surface hover:bg-surface/20">
                   Lihat Produk
                 </Button>
               </Link>
-              <Link href="/toko">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto bg-surface/10 text-surface border-surface hover:bg-surface/20">
+              <Link href="/toko" className="w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="w-full bg-surface/10 text-surface border-surface hover:bg-surface/20">
                   Lihat Toko BUMDes
                 </Button>
               </Link>
               {!session && (
-                <Link href="/register">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto bg-surface/10 text-surface border-surface hover:bg-surface/20">
+                <Link href="/register" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full bg-surface/10 text-surface border-surface hover:bg-surface/20">
                     Daftarkan BUMDes
                   </Button>
                 </Link>
@@ -197,7 +197,7 @@ export default async function Home() {
             <h2 className="text-2xl font-bold text-text-main mb-2">BUMDes Terverifikasi</h2>
             <p className="text-text-muted">Jejaring penyedia pasokan resmi di ekosistem bumdesmart.id.</p>
           </div>
-          <Link href="/toko" className="hidden sm:flex items-center text-primary font-semibold hover:text-primary-dark">
+          <Link href="/toko" className="hidden sm:flex items-center text-primary font-semibold hover:text-primary-dark whitespace-nowrap ml-4">
             Lihat Semua BUMDes <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </div>

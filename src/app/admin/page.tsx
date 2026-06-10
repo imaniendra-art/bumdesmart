@@ -32,10 +32,30 @@ export default async function AdminDashboardPage() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-text-main">Ringkasan Platform</h1>
-        <Link href="/admin/laporan/transaksi">
+        <Link href="/admin/laporan/transaksi" className="hidden sm:block">
           <Button variant="outline" className="flex items-center gap-2">
             <FileText className="h-4 w-4" /> Laporan Transaksi
           </Button>
+        </Link>
+      </div>
+
+      {/* Mobile Admin Menu */}
+      <div className="md:hidden grid grid-cols-2 gap-3 mb-8">
+        <Link href="/admin/bumdes" className="flex flex-col items-center justify-center bg-surface p-4 rounded-lg border border-border shadow-sm hover:bg-surface-bg transition-colors">
+          <StoreIcon className="h-6 w-6 text-primary mb-2" />
+          <span className="text-xs font-bold text-center">Verifikasi Toko</span>
+        </Link>
+        <Link href="/admin/produk" className="flex flex-col items-center justify-center bg-surface p-4 rounded-lg border border-border shadow-sm hover:bg-surface-bg transition-colors">
+          <Package className="h-6 w-6 text-primary mb-2" />
+          <span className="text-xs font-bold text-center">Verifikasi Produk</span>
+        </Link>
+        <Link href="/admin/pesanan" className="flex flex-col items-center justify-center bg-surface p-4 rounded-lg border border-border shadow-sm hover:bg-surface-bg transition-colors">
+          <ShoppingBag className="h-6 w-6 text-primary mb-2" />
+          <span className="text-xs font-bold text-center">Pesanan</span>
+        </Link>
+        <Link href="/admin/laporan/transaksi" className="flex flex-col items-center justify-center bg-surface p-4 rounded-lg border border-border shadow-sm hover:bg-surface-bg transition-colors">
+          <FileText className="h-6 w-6 text-primary mb-2" />
+          <span className="text-xs font-bold text-center">Laporan</span>
         </Link>
       </div>
       

@@ -46,19 +46,19 @@ export default async function StoreProfilePage({
         <div className="bg-surface rounded-xl border border-border overflow-hidden mb-8 shadow-sm">
           <div className="h-48 bg-primary relative">
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div className="absolute bottom-6 left-6 right-6 flex items-end">
-              <div className="h-24 w-24 bg-surface rounded-lg border-4 border-surface flex items-center justify-center text-primary shadow-lg overflow-hidden flex-shrink-0">
+            <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex items-end">
+              <div className="h-20 w-20 sm:h-24 sm:w-24 bg-surface rounded-lg border-4 border-surface flex items-center justify-center text-primary shadow-lg overflow-hidden flex-shrink-0">
                 {store.logoUrl ? (
                   <img src={store.logoUrl} alt={store.name} className="w-full h-full object-cover" />
                 ) : (
-                  <StoreIcon className="h-12 w-12" />
+                  <StoreIcon className="h-10 w-10 sm:h-12 sm:w-12" />
                 )}
               </div>
-              <div className="ml-5 pb-1 text-surface">
-                <h1 className="text-3xl font-bold">{store.name}</h1>
-                <p className="flex items-center text-surface/90 mt-1 text-sm">
-                  <MapPin className="h-4 w-4 mr-1" /> 
-                  {store.bumdesId?.village}, {store.bumdesId?.district}, {store.bumdesId?.cityOrRegency}, {store.bumdesId?.province}
+              <div className="ml-4 sm:ml-5 pb-1 text-surface">
+                <h1 className="text-2xl sm:text-3xl font-bold">{store.name}</h1>
+                <p className="flex items-start sm:items-center text-surface/90 mt-1 text-xs sm:text-sm">
+                  <MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-1 mt-0.5 sm:mt-0 flex-shrink-0" /> 
+                  <span className="line-clamp-2 sm:line-clamp-1">{store.bumdesId?.village}, {store.bumdesId?.district}, {store.bumdesId?.cityOrRegency}, {store.bumdesId?.province}</span>
                 </p>
               </div>
             </div>

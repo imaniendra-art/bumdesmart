@@ -68,6 +68,58 @@ export default async function MarketplacePage({
 
   const categories = await Category.find({ isActive: true }).sort({ sortOrder: 1, name: 1 });
 
+  const renderFilters = () => (
+    <form>
+      {resolvedSearchParams.q && <input type="hidden" name="q" value={resolvedSearchParams.q} />}
+      <div className="mb-6">
+        <h3 className="font-semibold text-text-main mb-3 flex items-center">
+          <Filter className="h-4 w-4 mr-2" /> Kategori
+        </h3>
+        <div className="space-y-2">
+          <label className="flex items-center">
+            <input type="radio" name="category" value="Semua" defaultChecked={!resolvedSearchParams.category || resolvedSearchParams.category === "Semua"} className="text-primary focus:ring-primary mr-2" />
+            <span className="text-sm text-text-muted">Semua Kategori</span>
+          </label>
+          {categories.map((cat) => (
+            <label key={cat._id.toString()} className="flex items-center">
+              <input type="radio" name="category" value={cat.name} defaultChecked={resolvedSearchParams.category === cat.name} className="text-primary focus:ring-primary mr-2" />
+              <span className="text-sm text-text-muted">{cat.name}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+      
+      <div className="mb-6">
+        <h3 className="font-semibold text-text-main mb-3">Lokasi (Opsional)</h3>
+        <FilterLocation 
+          initialProvince={resolvedSearchParams.province} 
+          initialRegency={resolvedSearchParams.regency} 
+        />
+      </div>
+
+      <div className="mb-6">
+        <h3 className="font-semibold text-text-main mb-3">Tipe Pembelian</h3>
+        <div className="space-y-2">
+          <label className="flex items-center">
+            <input type="checkbox" name="wholesale" value="true" defaultChecked={resolvedSearchParams.wholesale === "true"} className="rounded text-primary focus:ring-primary mr-2" />
+            <span className="text-sm text-text-muted">Harga Grosir</span>
+          </label>
+        </div>
+      </div>
+
+      <div className="mb-6">
+        <h3 className="font-semibold text-text-main mb-3">Urutkan</h3>
+        <select name="sort" defaultValue={resolvedSearchParams.sort || "newest"} className="w-full text-sm border border-border rounded px-2 py-2 focus:ring-primary bg-surface">
+          <option value="newest">Terbaru</option>
+          <option value="lowest_price">Harga Terendah</option>
+          <option value="highest_price">Harga Tertinggi</option>
+        </select>
+      </div>
+
+      <Button type="submit" className="w-full">Terapkan Filter</Button>
+    </form>
+  );
+
   return (
     <div className="bg-surface-bg min-h-screen">
       {/* Left-Aligned Slim Hero */}
@@ -82,7 +134,7 @@ export default async function MarketplacePage({
           
           <div className="flex-shrink-0">
             <Link href="/toko">
-              <Button variant="outline" className="h-10 px-6 border-surface text-surface bg-surface/10 hover:bg-surface/20 font-semibold">
+              <Button variant="outline" className="h-10 px-6 border-surface text-surface bg-surface/10 hover:bg-surface/20 font-semibold w-full md:w-auto">
                 Cari BUMDes
               </Button>
             </Link>
@@ -91,73 +143,32 @@ export default async function MarketplacePage({
       </div>
 
       <div className="w-full px-4 sm:px-8 lg:px-24 py-8">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
-          <div className="flex items-center text-text-main font-semibold">
-            {availableProducts.length} Produk Ditemukan
-          </div>
-          <div className="md:hidden">
-            <Button variant="outline" className="w-full justify-center">
-              <Filter className="h-4 w-4 mr-2" /> Filter
-            </Button>
-          </div>
+        <div className="flex items-center text-text-main font-semibold mb-6">
+          {availableProducts.length} Produk Ditemukan
         </div>
 
         <div className="flex flex-col md:flex-row gap-8">
           {/* Sidebar Filters */}
-          <div className="hidden md:block w-64 flex-shrink-0">
-            <Card>
-              <CardContent className="p-5">
-                <form>
-                  {resolvedSearchParams.q && <input type="hidden" name="q" value={resolvedSearchParams.q} />}
-                  <div className="mb-6">
-                    <h3 className="font-semibold text-text-main mb-3 flex items-center">
-                      <Filter className="h-4 w-4 mr-2" /> Kategori
-                    </h3>
-                    <div className="space-y-2">
-                      <label className="flex items-center">
-                        <input type="radio" name="category" value="Semua" defaultChecked={!resolvedSearchParams.category || resolvedSearchParams.category === "Semua"} className="text-primary focus:ring-primary mr-2" />
-                        <span className="text-sm text-text-muted">Semua Kategori</span>
-                      </label>
-                      {categories.map((cat) => (
-                        <label key={cat._id.toString()} className="flex items-center">
-                          <input type="radio" name="category" value={cat.name} defaultChecked={resolvedSearchParams.category === cat.name} className="text-primary focus:ring-primary mr-2" />
-                          <span className="text-sm text-text-muted">{cat.name}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div className="mb-6">
-                    <h3 className="font-semibold text-text-main mb-3">Lokasi (Opsional)</h3>
-                    <FilterLocation 
-                      initialProvince={resolvedSearchParams.province} 
-                      initialRegency={resolvedSearchParams.regency} 
-                    />
-                  </div>
+          <div className="w-full md:w-64 flex-shrink-0">
+            {/* Mobile Filter (Collapsible) */}
+            <details className="md:hidden group bg-surface rounded-lg border border-border mb-6">
+              <summary className="flex items-center justify-between p-4 font-bold cursor-pointer list-none">
+                <div className="flex items-center"><Filter className="h-5 w-5 mr-2" /> Filter Pencarian</div>
+                <span className="group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <div className="p-4 border-t border-border">
+                {renderFilters()}
+              </div>
+            </details>
 
-                  <div className="mb-6">
-                    <h3 className="font-semibold text-text-main mb-3">Tipe Pembelian</h3>
-                    <div className="space-y-2">
-                      <label className="flex items-center">
-                        <input type="checkbox" name="wholesale" value="true" defaultChecked={resolvedSearchParams.wholesale === "true"} className="rounded text-primary focus:ring-primary mr-2" />
-                        <span className="text-sm text-text-muted">Harga Grosir</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  <div className="mb-6">
-                    <h3 className="font-semibold text-text-main mb-3">Urutkan</h3>
-                    <select name="sort" defaultValue={resolvedSearchParams.sort || "newest"} className="w-full text-sm border border-border rounded px-2 py-2 focus:ring-primary bg-surface">
-                      <option value="newest">Terbaru</option>
-                      <option value="lowest_price">Harga Terendah</option>
-                      <option value="highest_price">Harga Tertinggi</option>
-                    </select>
-                  </div>
-
-                  <Button type="submit" className="w-full">Terapkan Filter</Button>
-                </form>
-              </CardContent>
-            </Card>
+            {/* Desktop Filter */}
+            <div className="hidden md:block">
+              <Card>
+                <CardContent className="p-5">
+                  {renderFilters()}
+                </CardContent>
+              </Card>
+            </div>
           </div>
 
           {/* Product Grid */}

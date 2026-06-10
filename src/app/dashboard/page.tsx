@@ -175,16 +175,38 @@ export default async function DashboardPage() {
 
         {/* Main Content */}
         <main className="flex-1 p-4 sm:p-8">
-          <div className="flex justify-between items-center mb-8">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 gap-4">
             <h1 className="text-2xl font-bold text-text-main">Ringkasan Toko</h1>
             <div className="flex gap-2">
-              <Link href="/dashboard/laporan/penjualan">
-                <Button variant="outline">Lihat Laporan</Button>
+              <Link href="/dashboard/laporan/penjualan" className="w-full sm:w-auto">
+                <Button variant="outline" className="w-full">Lihat Laporan</Button>
               </Link>
-              <Link href="/dashboard/produk/tambah">
-                <Button>Tambah Produk</Button>
+              <Link href="/dashboard/produk/tambah" className="w-full sm:w-auto">
+                <Button className="w-full">Tambah Produk</Button>
               </Link>
             </div>
+          </div>
+
+          {/* Mobile Dashboard Menu */}
+          <div className="md:hidden grid grid-cols-2 gap-3 mb-8">
+            <Link href="/dashboard/toko/edit" className="flex flex-col items-center justify-center bg-surface p-4 rounded-lg border border-border shadow-sm hover:bg-surface-bg transition-colors">
+              <Settings className="h-6 w-6 text-primary mb-2" />
+              <span className="text-xs font-bold text-center">Profil Toko</span>
+            </Link>
+            <Link href="/dashboard/produk" className="flex flex-col items-center justify-center bg-surface p-4 rounded-lg border border-border shadow-sm hover:bg-surface-bg transition-colors">
+              <Package className="h-6 w-6 text-primary mb-2" />
+              <span className="text-xs font-bold text-center">Produk Saya</span>
+            </Link>
+            <Link href="/dashboard/pesanan" className="flex flex-col items-center justify-center bg-surface p-4 rounded-lg border border-border shadow-sm hover:bg-surface-bg transition-colors">
+              <ShoppingBag className="h-6 w-6 text-primary mb-2" />
+              <span className="text-xs font-bold text-center text-primary-dark">
+                Pesanan Masuk {newOrders > 0 && `(${newOrders})`}
+              </span>
+            </Link>
+            <Link href="/pesanan" className="flex flex-col items-center justify-center bg-surface p-4 rounded-lg border border-border shadow-sm hover:bg-surface-bg transition-colors">
+              <Users className="h-6 w-6 text-primary mb-2" />
+              <span className="text-xs font-bold text-center">Pembelian Saya</span>
+            </Link>
           </div>
 
           {store && !store.bankAccount?.bankAccountNumber && (
