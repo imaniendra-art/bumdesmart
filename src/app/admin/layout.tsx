@@ -63,7 +63,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           </form>
         </div>
       </aside>
-      <main className="flex-1 p-4 sm:p-8">
+      <main className="flex-1 min-w-0 w-full overflow-x-hidden p-4 sm:p-8">
         {children}
       </main>
     </div>
