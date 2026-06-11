@@ -27,7 +27,7 @@ export default async function AdminProductsList({
     .lean();
 
   return (
-    <div>
+    <div className="w-full max-w-full overflow-hidden">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <h1 className="text-2xl font-bold">Verifikasi Produk BUMDes</h1>
         
@@ -46,7 +46,7 @@ export default async function AdminProductsList({
 
       <Card>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm text-left text-text-main">
+          <table className="w-full min-w-[800px] text-sm text-left text-text-main">
             <thead className="text-xs text-text-muted uppercase bg-surface-bg">
               <tr>
                 <th className="px-6 py-3">Produk</th>

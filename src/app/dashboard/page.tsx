@@ -24,14 +24,38 @@ export default async function DashboardPage() {
 
   if (session.role === "CUSTOMER") {
     return (
-      <div className="min-h-screen bg-surface-bg p-8">
-        <h1 className="text-2xl font-bold mb-6">Dashboard Pembeli</h1>
+      <div className="min-h-screen bg-surface-bg p-4 sm:p-8">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-bold">Dashboard Pembeli</h1>
+          <form action="/api/auth/logout" method="POST" className="hidden sm:block">
+            <Button type="submit" variant="outline" className="text-danger hover:bg-danger/10 border-danger/20">Keluar</Button>
+          </form>
+        </div>
         <Card>
           <CardContent className="p-6">
-            <h2 className="text-lg font-semibold mb-4">Selamat datang, {session.name || session.email}!</h2>
-            <p className="text-text-muted mb-4">Di sini Anda dapat melihat riwayat pesanan Anda dari berbagai BUMDes.</p>
-            <div className="bg-surface-bg/50 p-4 border border-border rounded text-center text-text-muted">
-              Belum ada pesanan saat ini.
+            <h2 className="text-lg font-semibold mb-2">Selamat datang, {session.name || session.email}!</h2>
+            <p className="text-text-muted mb-6">Kelola pesanan dan aktivitas belanja Anda di BUMDesMart.</p>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              <Link href="/pesanan" className="w-full">
+                <Button className="w-full flex items-center justify-center h-12 text-sm sm:text-base">
+                  <ShoppingBag className="mr-2 h-5 w-5" /> Lihat Pesanan Saya
+                </Button>
+              </Link>
+              <Link href="/produk" className="w-full">
+                <Button variant="outline" className="w-full flex items-center justify-center h-12 text-sm sm:text-base">
+                  <Package className="mr-2 h-5 w-5" /> Mulai Belanja
+                </Button>
+              </Link>
+            </div>
+
+            <div className="md:hidden mt-6 border-t border-border pt-6">
+              <form action="/api/auth/logout" method="POST">
+                <button type="submit" className="w-full flex items-center justify-center bg-danger/10 text-danger p-4 rounded-lg border border-danger/20 shadow-sm hover:bg-danger/20 transition-colors">
+                  <LogOut className="h-5 w-5 mr-2" />
+                  <span className="text-sm font-bold">Keluar (Logout)</span>
+                </button>
+              </form>
             </div>
           </CardContent>
         </Card>
@@ -207,6 +231,14 @@ export default async function DashboardPage() {
               <Users className="h-6 w-6 text-primary mb-2" />
               <span className="text-xs font-bold text-center">Pembelian Saya</span>
             </Link>
+            <div className="col-span-2 mt-2">
+              <form action="/api/auth/logout" method="POST">
+                <button type="submit" className="w-full flex items-center justify-center bg-danger/10 text-danger p-4 rounded-lg border border-danger/20 shadow-sm hover:bg-danger/20 transition-colors">
+                  <LogOut className="h-5 w-5 mr-2" />
+                  <span className="text-sm font-bold">Keluar (Logout)</span>
+                </button>
+              </form>
+            </div>
           </div>
 
           {store && !store.bankAccount?.bankAccountNumber && (
@@ -265,10 +297,15 @@ export default async function DashboardPage() {
                 <p className="text-xs text-success/80 mt-2">Dari {completedOrdersCount} pesanan selesai</p>
               </CardContent>
             </Card>
-            <Card>
-              <CardContent className="p-6">
-                <p className="text-sm text-text-muted font-medium">Total Pesanan</p>
-                <p className="text-3xl font-bold text-success mt-2">{totalOrders}</p>
+            <Card className="flex flex-col">
+              <CardContent className="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <p className="text-sm text-text-muted font-medium">Total Pesanan</p>
+                  <p className="text-3xl font-bold text-success mt-2">{totalOrders}</p>
+                </div>
+                <Link href="/dashboard/pesanan" className="mt-4 block">
+                  <Button variant="outline" size="sm" className="w-full">Lihat Pesanan Masuk</Button>
+                </Link>
               </CardContent>
             </Card>
           </div>

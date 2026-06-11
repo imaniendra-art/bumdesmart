@@ -5,7 +5,7 @@ import Store from "@/models/Store";
 import Product from "@/models/Product";
 import Order from "@/models/Order";
 import Link from "next/link";
-import { Users, Store as StoreIcon, Package, CheckCircle, ShoppingBag, Banknote, FileText } from "lucide-react";
+import { Users, Store as StoreIcon, Package, CheckCircle, ShoppingBag, Banknote, FileText, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 export default async function AdminDashboardPage() {
@@ -57,6 +57,14 @@ export default async function AdminDashboardPage() {
           <FileText className="h-6 w-6 text-primary mb-2" />
           <span className="text-xs font-bold text-center">Laporan</span>
         </Link>
+        <div className="col-span-2 mt-2">
+          <form action="/api/auth/logout" method="POST">
+            <button type="submit" className="w-full flex items-center justify-center bg-danger/10 text-danger p-4 rounded-lg border border-danger/20 shadow-sm hover:bg-danger/20 transition-colors">
+              <LogOut className="h-5 w-5 mr-2" />
+              <span className="text-sm font-bold">Keluar (Logout)</span>
+            </button>
+          </form>
+        </div>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

@@ -67,7 +67,7 @@ export default async function AdminLaporanTransaksiPage({
   const csvUrl = `/api/reports/admin?${params.toString()}`;
 
   return (
-    <div className="pb-10 max-w-full">
+    <div className="pb-10 w-full max-w-full overflow-hidden">
       <div className="mb-6">
         <Link href="/admin">
           <span className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-border hover:bg-surface-bg hover:text-text-main h-10 py-2 px-4 bg-surface text-text-main">
@@ -137,7 +137,7 @@ export default async function AdminLaporanTransaksiPage({
       {/* Tabel */}
       <div className="bg-surface rounded-xl border border-border overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-sm text-left whitespace-nowrap">
+          <table className="w-full min-w-[800px] text-sm text-left whitespace-nowrap">
             <thead className="bg-surface-bg text-text-muted uppercase text-xs border-b border-border">
               <tr>
                 <th className="px-4 py-3">No. Pesanan & Tgl</th>

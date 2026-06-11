@@ -42,7 +42,7 @@ export default async function AdminPesananPage({
     .sort({ createdAt: -1 });
 
   return (
-    <div>
+    <div className="w-full max-w-full overflow-hidden">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
           <h1 className="text-2xl font-bold text-text-main">Semua Pesanan</h1>
@@ -95,7 +95,7 @@ export default async function AdminPesananPage({
       ) : (
         <div className="bg-surface rounded-xl border border-border overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-sm text-left">
+            <table className="w-full min-w-[800px] text-sm text-left">
               <thead className="bg-surface-bg text-text-muted uppercase text-xs border-b border-border">
                 <tr>
                   <th className="px-6 py-4 font-semibold">Order ID & Waktu</th>
